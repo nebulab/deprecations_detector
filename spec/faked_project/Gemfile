@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+
+gem 'cucumber'
+gem 'rake'
+gem 'deprecations_collector', path: '../../../'
+gem 'rspec', '>= 2.6.0'
+gem 'activesupport', '>= 7.0.4.2'

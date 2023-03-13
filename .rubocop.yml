@@ -1,0 +1,22 @@
+require:
+  - rubocop-rspec
+
+inherit_from:
+  - https://relaxed.ruby.style/rubocop.yml
+
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb
+    - db/seeds/**/*
+    - spec/**/*
+
+RSpec/MultipleExpectations:
+  Max: 5
+  # Default is 1
+
+RSpec/ExampleLength:
+  Max: 20
+  # Default is 5
+
+AllCops:
+  TargetRubyVersion: 1.9
