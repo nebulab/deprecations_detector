@@ -42,15 +42,16 @@ module DeprecationsCollector
       changes
     end
 
-    def add_deprecation(message)
+    def add_deprecation(message, callstack)
       bc = ::ActiveSupport::BacktraceCleaner.new
-      bc.add_filter   { |line| line.gsub(Dir.pwd, '') }
-      callstack = bc.clean(caller)[2..-1]
+      bc.add_filter   { |line| line.to_s.gsub(Dir.pwd, '') }
+      callstack = bc.clean(callstack)# [1..-1]
       callstack.map do |line_path|
+        line_path = line_path.to_s
+
         result = /(\D*)[:](\d*)/.match(line_path)
         next if @deprecation_matrix.nil? || result.nil?
 
-        {file_path: result[1], line_index: result[2]}
         @deprecation_matrix[result[1]] ||= {}
         @deprecation_matrix[result[1]][result[2].to_i - 1] = message
       end
