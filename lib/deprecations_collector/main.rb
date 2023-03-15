@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-Coverage.start
-
 module DeprecationsCollector
   class Main
     include Singleton
@@ -64,6 +62,7 @@ module DeprecationsCollector
     def start
       @coverage_matrix = {}
       @deprecation_matrix = {}
+      Coverage.start
       reset_last_state
     end
 
