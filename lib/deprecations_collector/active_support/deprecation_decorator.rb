@@ -4,8 +4,7 @@ module DeprecationsCollector
   module ActiveSupport
     module DeprecationDecorator
       def warn(message = nil, callstack = caller)
-
-        DeprecationsCollector::Main.add_deprecation(message, callstack)
+        DeprecationsCollector::Main.add_deprecation(message, caller)
 
         super(message, callstack)
       end

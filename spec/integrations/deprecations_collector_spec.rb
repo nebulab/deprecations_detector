@@ -25,13 +25,6 @@ RSpec.describe DeprecationsCollector do
       example.call
     end
 
-    context 'when faked_project dir path is excluded' do
-      it "doesn't fill the coverage_matrix" do |e|
-        expect(described_method.call(e)).to be_empty
-        expect(deprecations_collector.coverage_matrix).to be_empty
-      end
-    end
-
     context 'when faked_project dir path is included' do
       let(:start_deprecations_collector) do
         deprecations_collector.config[:file_filter] = ->(file_path) { file_path.include? 'faked_project' }
@@ -42,32 +35,6 @@ RSpec.describe DeprecationsCollector do
         expect(described_method.call(e)).not_to be_empty
         expect(deprecations_collector.coverage_matrix).not_to be_empty
       end
-    end
-  end
-
-  describe '#reset_last_state' do
-    subject(:described_method) { deprecations_collector.reset_last_state }
-
-    before do
-      deprecations_collector.config[:file_filter] = ->(file_path) { file_path.include? 'faked_project' }
-      deprecations_collector.start
-      require_relative '../../spec/faked_project/lib/faked_project.rb'
-    end
-
-    it 'returns only the lines executed after reset' do |e|
-      SomeClass.new('foo').reverse
-      diff = deprecations_collector.add(e)
-
-      key = diff.keys.detect { |file_path| file_path.end_with?('/some_class.rb') }
-      expect(diff).to match(hash_including(key => hash_including(7, 11)))
-
-      described_method
-
-      SomeClass.new('FOO').downcase
-      diff = deprecations_collector.add(e)
-      key = diff.keys.detect { |file_path| file_path.end_with?('/some_class.rb') }
-      expect(diff).to match(hash_including(key => hash_including(7, 15)))
-      expect(diff).not_to match(hash_including(key => hash_including(11)))
     end
   end
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'coverage'
 require 'singleton'
 require 'yaml'
 require 'active_support'
