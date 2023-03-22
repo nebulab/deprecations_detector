@@ -4,7 +4,7 @@ module DeprecationsCollector
   class Main
     include Singleton
 
-    attr_reader :coverage_matrix, :deprecation_matrix
+    attr_reader :coverage_matrix, :deprecation_matrix, :suppress_deprecations
     attr_accessor :config, :output_path
 
     def initialize
@@ -47,7 +47,9 @@ module DeprecationsCollector
       end
     end
 
-    def start
+    def start(suppress_deprecations: false)
+      @suppress_deprecations = suppress_deprecations
+
       @coverage_matrix = {}
       @deprecation_matrix = {}
     end
@@ -67,8 +69,16 @@ module DeprecationsCollector
     end
 
     class << self
-      def method_missing(method, *args, &block)
-        instance.respond_to?(method) ? instance.send(method, *args, &block) : super
+      def method_missing(method, *args, **kwargs, &block)
+        if instance.respond_to?(method)
+          if Gem::Version.new(RUBY_VERSION) > Gem::Version.new('3')
+            instance.send(method, *args, **kwargs, &block)
+          else
+            instance.send(method, *args, &block)
+          end
+        else
+          super
+        end
       end
 
       def respond_to_missing?(method, include_private = false)
