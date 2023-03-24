@@ -62,27 +62,31 @@ module DeprecationsCollector
         end
 
         def grouped(files)
+          groups = files.group_by do |file_name, lines|
+            lines.map do |line, examples|
+              examples.map { |example| example[:deprecation_message] }
+            end
+          end.keys.flatten.uniq
+
           grouped = {}
           grouped_files = []
 
-          groups = {
-            'Controllers' => %r{/app/controllers},
-            'Channels' => %r{/app/channels},
-            'Models' => %r{/app/models},
-            'Mailers' => %r{/app/mailers},
-            'Helpers' => %r{/app/helpers},
-            'Jobs' => %r{/app/jobs|/app/workers},
-            'Libraries' => %r{/lib/}
-          }
-
-          groups.each do |name, filter|
-            grouped[name] = files.select { |source_file| filter.match?(source_file) }
-            grouped_files += grouped[name].keys
+          groups.each do |deprecation_message|
+            grouped[deprecation_message] = files.select { |source_file, lines| lines.detect { |line, examples| examples.detect { |example| example[:deprecation_message] == deprecation_message } } }
+            grouped_files += grouped[deprecation_message].keys
           end
           if !groups.empty? && !(other_files = files.reject { |source_file| grouped_files.include?(source_file) }).empty?
             grouped["Ungrouped"] = other_files
           end
-          grouped
+
+          arr = grouped.map do |deprecation_message, objects|
+            [
+              deprecation_message,
+              -objects.to_a.sum { |file, lines| lines.sum { |line, examples| examples.count } }
+            ]
+          end.sort_by { |group| group.second }.to_h.keys[0..6] # filter just the 6 most frequent deprecations
+
+          arr.map { |k| [k, grouped[k]] }.to_h
         end
 
         # Returns a table containing the given source files

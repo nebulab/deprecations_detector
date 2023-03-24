@@ -13,10 +13,6 @@
         <% attrs = covered ? " class=\"covered\" title=\"#{result_data[line_number].count} examples\"" : ' class="never"' %>
         <li data-linenumber="<%= line_number %>"<%= attrs %>>
           <code class="ruby"><%= CGI.escapeHTML(line.chomp) %></code>
-          <% if covered %>
-            <% example_refs = result_data[line_number].map {|e| e[:example_ref] } %>
-            <div class="deprecations_collector" data-example-refs="<%= example_refs.join(',') %>"></div>
-          <% end %>
         </li>
       <% end %>
     </ol>
