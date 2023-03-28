@@ -84,7 +84,7 @@ module DeprecationsCollector
               deprecation_message,
               -objects.to_a.sum { |file, lines| lines.sum { |line, examples| examples.count } }
             ]
-          end.sort_by { |group| group.second }.to_h.keys[0..6] # filter just the 6 most frequent deprecations
+          end.sort_by { |group| group[1] }.to_h.keys[0..6] # filter just the 6 most frequent deprecations
 
           arr.map { |k| [k, grouped[k]] }.to_h
         end
