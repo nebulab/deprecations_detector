@@ -34,17 +34,18 @@ module DeprecationsCollector
     end
 
     def add_deprecation(message, callstack)
-      callstack.map do |line_path|
-        line_path = line_path.to_s
+      bc = ::ActiveSupport::BacktraceCleaner.new
+      bc.add_silencer { |line| !line.match?(Dir.pwd) }
+      line_path = bc.clean(callstack).first
+      line_path = line_path.to_s
 
-        result = /(\D*)[:](\d*)/.match(line_path)
-        next if @deprecation_matrix.nil? || result.nil?
+      result = /(\D*)[:](\d*)/.match(line_path)
+      return if @deprecation_matrix.nil? || result.nil?
 
-        file_path = result[1] # "#{Dir.pwd}#{result[1]}"
+      file_path = result[1] # "#{Dir.pwd}#{result[1]}"
 
-        @deprecation_matrix[file_path] ||= {}
-        @deprecation_matrix[file_path][result[2].to_i - 1] = message
-      end
+      @deprecation_matrix[file_path] ||= {}
+      @deprecation_matrix[file_path][result[2].to_i - 1] = message
     end
 
     def start(suppress_deprecations: false)
