@@ -22,6 +22,8 @@ module DeprecationsCollector
 
       select_project_files(deprecation_matrix).each do |file_path, lines|
         lines.each do |line, message|
+          # next if example.metadata[:file_path] != file_path.gsub(Dir.pwd, '.') && example.metadata[:line_number] != line
+
           file_info = { file_path: file_path, line_index: line }
           example = example_data.merge(deprecation_message: message)
 
@@ -34,12 +36,21 @@ module DeprecationsCollector
     end
 
     def add_deprecation(message, callstack)
+      p "DIR AAAA"
+      p "Dir.pwd"
+      p Dir.pwd
+      p callstack
       bc = ::ActiveSupport::BacktraceCleaner.new
       bc.add_silencer { |line| !line.match?(Dir.pwd) }
+      bc.add_silencer { |line| line.match?('/vendor/bundle/') }
       line_path = bc.clean(callstack).first
+      p "CLEAN"
+      p line_path
       line_path = line_path.to_s
 
       result = /(\D*)[:](\d*)/.match(line_path)
+      p "RESULT"
+      p result
       return if @deprecation_matrix.nil? || result.nil?
 
       file_path = result[1] # "#{Dir.pwd}#{result[1]}"
