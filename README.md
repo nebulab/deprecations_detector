@@ -6,7 +6,7 @@ The goal of this component is to collect and list all the deprecation of the pro
 
 ## Installation
 
-Add `gem 'deprecations_collector', github: 'nebulab/deprecations_collector'` to your application's Gemfile and execute `bundle`.
+Add `gem 'deprecations_collector', git: 'https://github.com/nebulab/deprecations_collector'` to your application's Gemfile and execute `bundle`.
 
 Put the following code under you specs configuration:
 
