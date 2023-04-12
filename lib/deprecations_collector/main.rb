@@ -58,18 +58,14 @@ module DeprecationsCollector
       @deprecation_matrix = {}
     end
 
-    def save_results(file_name: 'deprecations_collector.yml')
-      result_and_stop_coverage
+    def save_results(matrix = @coverage_matrix, file_name: ENV['MATRIX_FILENAME'] || 'deprecations_collector.yml')
       path = File.join(output_path, file_name)
       FileUtils.mkdir_p(output_path)
 
       File.open(path, 'w') do |f|
-        results = @coverage_matrix.sort.map { |k, v| [k, v.sort.to_h] }.to_h
+        results = matrix.sort.map { |k, v| [k, v.sort.to_h] }.to_h
         f.write results.to_yaml
       end
-    end
-
-    def result_and_stop_coverage
     end
 
     class << self
