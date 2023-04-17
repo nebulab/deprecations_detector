@@ -7,9 +7,10 @@ namespace :deprecations do
   task :combine, [:matrix_folder, :matrix_filename] do |_t, args|
     matrix_folder = args[:matrix_folder].to_s
 
-    combined_matrix = Dir.entries(matrix_folder).select { |f| !f.start_with?('.') }.inject({}) do |temp_matrix, file_name|
+    yaml_files = Dir.glob("#{matrix_folder}/**/*.yml").reject { |f| File.directory?(f) }
+    combined_matrix = yaml_files.inject({}) do |temp_matrix, file_name|
       begin
-        matrix = YAML.load_file("#{matrix_folder}/#{file_name}")
+        matrix = YAML.load_file(file_name)
 
         temp_matrix.merge(matrix) do |file, oldval, newval|
           oldval.merge(newval) do |line, old_deprecation, new_deprecation|
