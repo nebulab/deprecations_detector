@@ -11,23 +11,23 @@ module DeprecationsCollector
   module Formatters
     module HTML
       class Formatter
-        def format(result)
+        def format(result, output_path: DeprecationsCollector::Main.output_path)
           public_r = './public/*'
           Dir[File.join(File.dirname(__FILE__), public_r)].each do |path|
-            FileUtils.cp_r(path, asset_output_path)
+            FileUtils.cp_r(path, asset_output_path(output_path))
           end
 
           File.open(File.join(output_path, "index.html"), "wb") do |file|
             file.puts template("layout").result(binding)
           end
-          puts output_message(result)
+          puts output_message(result, output_path)
         end
 
-        def output_message(result)
+        def output_message(result, output_path)
           "Coverage report generated for #{result.count} files to #{output_path}."
         end
 
-        def asset_output_path
+        def asset_output_path(output_path)
           return @asset_output_path if defined?(@asset_output_path) && @asset_output_path
 
           @asset_output_path = File.join(output_path, "assets", DeprecationsCollector::VERSION)
@@ -40,10 +40,6 @@ module DeprecationsCollector
         # Returns the an erb instance for the template of given name
         def template(name)
           ERB.new(File.read(File.join(File.dirname(__FILE__), "views", "#{name}.erb")))
-        end
-
-        def output_path
-          DeprecationsCollector::Main.output_path
         end
 
         def assets_path(name)

@@ -31,6 +31,16 @@ RSpec.configure do |config|
 end
 ```
 
+# Run it on multiple jobs
+
+Sometimes specs are run concurrently on multiple jobs. In order to collect the result on one file this gem provides some
+helpful task to combine the result in one single file and then format it.
+
+1. Remove the formatter from the after(:suite) hook
+2. Save the coverage result on the same directory with different name for any job (e.g. tmp/deps/a.yml, tmp/deps/b.yml etc..)
+3. Run the task to combine the YAML files `bundle exec rake 'deprecations:combine[tmp/deps/,deprecations_collector.yml]'`
+4. Run the task to format the YAML to HTML `bundle exec rake 'deprecations:format[tmp/deps/,deprecations_collector.yml]'`
+
 ## Testing
 
 Execute `bundle exec rspec` on the component root path, specs are based on an internal fake project.

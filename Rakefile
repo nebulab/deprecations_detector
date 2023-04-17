@@ -2,8 +2,13 @@
 
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
+require 'pry'
+require 'yaml'
 
 RSpec::Core::RakeTask.new(:spec)
+
+import './lib/tasks/deprecations/combine.rake'
+import './lib/tasks/deprecations/format.rake'
 
 task default: :spec
 
