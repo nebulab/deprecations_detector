@@ -7,7 +7,7 @@ require 'deprecations_collector/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'deprecations_collector'
-  spec.version       = DeprecationsCollector::VERSION
+  spec.version       = DeprecationsDetector::VERSION
   spec.summary       = 'A tool to find what specs examples cover a specific line of code'
   spec.description   = spec.summary
   spec.license       = 'MIT'

@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/deprecations_collector.svg)](https://badge.fury.io/rb/deprecations_collector)
 
-# DeprecationsCollector
+# DeprecationsDetector
 
 The goal of this component is to collect and list all the deprecation of the project visually.
 
@@ -15,18 +15,18 @@ require 'deprecations_collector'
 
 RSpec.configure do |config|
   config.before(:suite) do
-    DeprecationsCollector::Main.start
+    DeprecationsDetector::Main.start
   end
 
   config.around do |e|
     e.run
-    DeprecationsCollector::Main.add(e)
+    DeprecationsDetector::Main.add(e)
   end
 
   config.after(:suite) do
-    DeprecationsCollector::Main.save_results
-    coverage_matrix = DeprecationsCollector::Main.coverage_matrix
-    DeprecationsCollector::Formatters::HTML::Formatter.new.format(coverage_matrix)
+    DeprecationsDetector::Main.save_results
+    coverage_matrix = DeprecationsDetector::Main.coverage_matrix
+    DeprecationsDetector::Formatters::HTML::Formatter.new.format(coverage_matrix)
   end
 end
 ```
@@ -44,7 +44,7 @@ helpful task to combine the result in one single file and then format it.
 
 ## Tasks
 
-Add the following lines on your Rakefile to make the DeprecationsCollector tasks available from your application:
+Add the following lines on your Rakefile to make the DeprecationsDetector tasks available from your application:
 
 ```
 spec = Gem::Specification.find_by_name 'deprecations_collector'
@@ -62,13 +62,13 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/nebula
 
 ## License
 
-DeprecationsCollector is copyright © 2023 [Nebulab](http://nebulab.it/). It is free software, and may be redistributed under the terms specified in the [license](LICENSE.txt).
+DeprecationsDetector is copyright © 2023 [Nebulab](http://nebulab.it/). It is free software, and may be redistributed under the terms specified in the [license](LICENSE.txt).
 Inspired by ReverseCoverage
 
 ## About
 
 ![Nebulab](http://nebulab.it/assets/images/public/logo.svg)
 
-DeprecationsCollector is funded and maintained by the [Nebulab](http://nebulab.it/) team.
+DeprecationsDetector is funded and maintained by the [Nebulab](http://nebulab.it/) team.
 
 We firmly believe in the power of open-source. [Contact us](http://nebulab.it/contact-us/) if you like our work and you need help with your project design or development.

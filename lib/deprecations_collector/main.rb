@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module DeprecationsCollector
+module DeprecationsDetector
   class Main
     include Singleton
 

@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe DeprecationsCollector do
-  let(:deprecations_collector) { DeprecationsCollector::Main }
+RSpec.describe DeprecationsDetector do
+  let(:deprecations_collector) { DeprecationsDetector::Main }
 
   around do |e|
     config = deprecations_collector.config.dup

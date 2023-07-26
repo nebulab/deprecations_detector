@@ -8,7 +8,7 @@ namespace :deprecations do
     folder = args[:folder]
     matrix = YAML.load_file("#{folder}/#{args[:matrix_filename]}")
 
-    DeprecationsCollector::Main.output_path = args[:folder]
-    DeprecationsCollector::Formatters::HTML::Formatter.new.format(matrix)
+    DeprecationsDetector::Main.output_path = args[:folder]
+    DeprecationsDetector::Formatters::HTML::Formatter.new.format(matrix)
   end
 end

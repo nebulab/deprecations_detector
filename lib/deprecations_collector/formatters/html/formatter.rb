@@ -7,11 +7,11 @@ require "digest/sha1"
 require "time"
 require "json"
 
-module DeprecationsCollector
+module DeprecationsDetector
   module Formatters
     module HTML
       class Formatter
-        def format(result, output_path: DeprecationsCollector::Main.output_path)
+        def format(result, output_path: DeprecationsDetector::Main.output_path)
           public_r = './public/*'
           Dir[File.join(File.dirname(__FILE__), public_r)].each do |path|
             FileUtils.cp_r(path, asset_output_path(output_path))
@@ -30,7 +30,7 @@ module DeprecationsCollector
         def asset_output_path(output_path)
           return @asset_output_path if defined?(@asset_output_path) && @asset_output_path
 
-          @asset_output_path = File.join(output_path, "assets", DeprecationsCollector::VERSION)
+          @asset_output_path = File.join(output_path, "assets", DeprecationsDetector::VERSION)
           FileUtils.mkdir_p(@asset_output_path)
           @asset_output_path
         end
@@ -43,7 +43,7 @@ module DeprecationsCollector
         end
 
         def assets_path(name)
-          File.join("./assets", DeprecationsCollector::VERSION, name)
+          File.join("./assets", DeprecationsDetector::VERSION, name)
         end
 
         # Returns the html for the given source_file
