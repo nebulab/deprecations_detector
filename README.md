@@ -37,9 +37,20 @@ Sometimes specs are run concurrently on multiple jobs. In order to collect the r
 helpful task to combine the result in one single file and then format it.
 
 1. Remove the formatter from the after(:suite) hook
-2. Save the coverage result on the same directory with different name for any job (e.g. tmp/deps/a.yml, tmp/deps/b.yml etc..)
-3. Run the task to combine the YAML files `bundle exec rake 'deprecations:combine[tmp/deps/,deprecations_collector.yml]'`
-4. Run the task to format the YAML to HTML `bundle exec rake 'deprecations:format[tmp/deps/,deprecations_collector.yml]'`
+2. Make the task available on your application following the instruction under `Tasks` section.
+3. Save the coverage result on the same directory with different name for any job (e.g. tmp/deps/a.yml, tmp/deps/b.yml etc..)
+4. Run the task to combine the YAML files `bundle exec rake 'deprecations:combine[tmp/deps/,deprecations_collector.yml]'`
+5. Run the task to format the YAML to HTML `bundle exec rake 'deprecations:format[tmp/deps/,deprecations_collector.yml]'`
+
+## Tasks
+
+Add the following lines on your Rakefile to make the DeprecationsCollector tasks available from your application:
+
+```
+spec = Gem::Specification.find_by_name 'deprecations_collector'
+load "#{spec.gem_dir}/lib/tasks/deprecations/combine.rake"
+load "#{spec.gem_dir}/lib/tasks/deprecations/format.rake"
+```
 
 ## Testing
 
