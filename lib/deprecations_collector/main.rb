@@ -58,7 +58,7 @@ module DeprecationsDetector
       @deprecation_matrix = {}
     end
 
-    def save_results(matrix = @coverage_matrix, file_name: ENV['MATRIX_FILENAME'] || 'deprecations_collector.yml')
+    def save_results(matrix = @coverage_matrix, file_name: ENV['MATRIX_FILENAME'] || 'deprecations_detector.yml')
       path = File.join(output_path, file_name)
       FileUtils.mkdir_p(output_path)
 

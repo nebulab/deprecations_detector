@@ -1,4 +1,4 @@
-require 'deprecations_collector'
+require 'deprecations_detector'
 
 RSpec.configure do |config|
   config.before(:suite) do

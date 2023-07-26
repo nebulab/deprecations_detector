@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'deprecations_collector'
+require 'deprecations_detector'
 
 namespace :deprecations do
   desc "Combines all results into one"

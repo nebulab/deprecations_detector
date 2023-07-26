@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/deprecations_collector.svg)](https://badge.fury.io/rb/deprecations_collector)
+[![Gem Version](https://badge.fury.io/rb/deprecations_detector.svg)](https://badge.fury.io/rb/deprecations_detector)
 
 # DeprecationsDetector
 
@@ -6,12 +6,12 @@ The goal of this component is to collect and list all the deprecation of the pro
 
 ## Installation
 
-Add `gem 'deprecations_collector', git: 'https://github.com/nebulab/deprecations_collector'` to your application's Gemfile and execute `bundle`.
+Add `gem 'deprecations_detector', git: 'https://github.com/nebulab/deprecations_detector'` to your application's Gemfile and execute `bundle`.
 
 Put the following code under you specs configuration:
 
 ```ruby
-require 'deprecations_collector'
+require 'deprecations_detector'
 
 RSpec.configure do |config|
   config.before(:suite) do
@@ -39,15 +39,15 @@ helpful task to combine the result in one single file and then format it.
 1. Remove the formatter from the after(:suite) hook
 2. Make the task available on your application following the instruction under `Tasks` section.
 3. Save the coverage result on the same directory with different name for any job (e.g. tmp/deps/a.yml, tmp/deps/b.yml etc..)
-4. Run the task to combine the YAML files `bundle exec rake 'deprecations:combine[tmp/deps/,deprecations_collector.yml]'`
-5. Run the task to format the YAML to HTML `bundle exec rake 'deprecations:format[tmp/deps/,deprecations_collector.yml]'`
+4. Run the task to combine the YAML files `bundle exec rake 'deprecations:combine[tmp/deps/,deprecations_detector.yml]'`
+5. Run the task to format the YAML to HTML `bundle exec rake 'deprecations:format[tmp/deps/,deprecations_detector.yml]'`
 
 ## Tasks
 
 Add the following lines on your Rakefile to make the DeprecationsDetector tasks available from your application:
 
 ```
-spec = Gem::Specification.find_by_name 'deprecations_collector'
+spec = Gem::Specification.find_by_name 'deprecations_detector'
 load "#{spec.gem_dir}/lib/tasks/deprecations/combine.rake"
 load "#{spec.gem_dir}/lib/tasks/deprecations/format.rake"
 ```
@@ -58,7 +58,7 @@ Execute `bundle exec rspec` on the component root path, specs are based on an in
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/nebulab/deprecations_collector. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/nebulab/deprecations_detector. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
