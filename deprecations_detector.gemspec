@@ -8,7 +8,7 @@ require 'deprecations_detector/version'
 Gem::Specification.new do |spec|
   spec.name          = 'deprecations_detector'
   spec.version       = DeprecationsDetector::VERSION
-  spec.summary       = 'A tool to find what specs examples cover a specific line of code'
+  spec.summary       = 'A tool to display deprecations in a simple way on a single HTML page.'
   spec.description   = spec.summary
   spec.license       = 'MIT'
   spec.authors       = ['Daniele Palombo']
