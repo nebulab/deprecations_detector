@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module DeprecationsCollector
+module DeprecationsDetector
   VERSION = '0.0.1'
 end

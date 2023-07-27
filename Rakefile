@@ -17,7 +17,7 @@ namespace :assets do
   task :compile do
     puts "Compiling assets"
     require "sprockets"
-    base_path = 'lib/deprecations_collector/formatters/html'
+    base_path = 'lib/deprecations_detector/formatters/html'
     assets = Sprockets::Environment.new
     assets.append_path "#{base_path}/assets/javascripts"
     assets.append_path "#{base_path}/assets/stylesheets"

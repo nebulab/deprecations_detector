@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'deprecations_collector'
+require 'deprecations_detector'
 require 'active_support'
 require 'pry'
 

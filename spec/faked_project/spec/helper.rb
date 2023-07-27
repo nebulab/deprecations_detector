@@ -3,4 +3,4 @@
 require 'spec_helper'
 require 'bundler/setup'
 require_relative '../lib/faked_project'
-require_relative 'support/deprecations_collector'
+require_relative 'support/deprecations_detector'

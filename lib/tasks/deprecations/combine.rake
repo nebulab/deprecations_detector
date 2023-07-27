@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'deprecations_collector'
+require 'deprecations_detector'
 
 namespace :deprecations do
   desc "Combines all results into one"
@@ -24,7 +24,7 @@ namespace :deprecations do
       end
     end
 
-    DeprecationsCollector::Main.output_path = args[:matrix_folder]
-    DeprecationsCollector::Main.save_results(combined_matrix, file_name: args[:matrix_filename])
+    DeprecationsDetector::Main.output_path = args[:matrix_folder]
+    DeprecationsDetector::Main.save_results(combined_matrix, file_name: args[:matrix_filename])
   end
 end

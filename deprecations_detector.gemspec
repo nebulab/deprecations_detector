@@ -3,17 +3,17 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'deprecations_collector/version'
+require 'deprecations_detector/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'deprecations_collector'
-  spec.version       = DeprecationsCollector::VERSION
+  spec.name          = 'deprecations_detector'
+  spec.version       = DeprecationsDetector::VERSION
   spec.summary       = 'A tool to find what specs examples cover a specific line of code'
   spec.description   = spec.summary
   spec.license       = 'MIT'
   spec.authors       = ['Daniele Palombo']
   spec.email         = ['danielepalombo@nebulab.com']
-  spec.homepage      = 'https://github.com/nebulab/deprecations_collector'
+  spec.homepage      = 'https://github.com/nebulab/deprecations_detector'
 
   spec.files         = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|extra)/}) }

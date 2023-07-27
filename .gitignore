@@ -51,6 +51,6 @@ bower.json
 node_modules/
 
 # Others
-spec/faked_project/tmp/deprecations_collector.yml
+spec/faked_project/tmp/deprecations_detector.yml
 
 tmp/

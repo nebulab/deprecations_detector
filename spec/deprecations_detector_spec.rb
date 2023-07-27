@@ -2,6 +2,6 @@
 
 require 'spec_helper'
 
-RSpec.describe DeprecationsCollector do
+RSpec.describe DeprecationsDetector do
   it { expect(described_class::VERSION).not_to be_nil }
 end

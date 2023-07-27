@@ -2,5 +2,5 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in deprecations_collector.gemspec
+# Specify your gem's dependencies in deprecations_detector.gemspec
 gemspec

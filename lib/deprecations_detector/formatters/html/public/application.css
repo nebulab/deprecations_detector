@@ -824,16 +824,16 @@ td {
 .source_table .skipped:nth-child(even) {
   background-color: #FBFfCf; }
 
-.source_table .deprecations_collector {
+.source_table .deprecations_detector {
   background: #fed;
   color: #333;
   display: none;
   padding: 2px 6px; }
-  .source_table .deprecations_collector > .example_data:nth-child(odd) {
+  .source_table .deprecations_detector > .example_data:nth-child(odd) {
     background-color: #FBF0C0; }
-  .source_table .deprecations_collector > .example_data:nth-child(even) {
+  .source_table .deprecations_detector > .example_data:nth-child(even) {
     background-color: #FBFfCf; }
-  .source_table .deprecations_collector > .example_data > .file_path {
+  .source_table .deprecations_detector > .example_data > .file_path {
     padding-left: 14px; }
 
 .tree-leaf .tree-child-leaves {
