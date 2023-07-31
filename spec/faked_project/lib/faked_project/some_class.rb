@@ -9,7 +9,9 @@ class SomeClass
   end
 
   def reverse
-    ActiveSupport::Deprecation.warn('My Deprecation')
+    deprecator = ActiveSupport::Deprecation.new
+    deprecator.behavior = DeprecationsDetector::Collect
+    deprecator.warn('My Deprecation')
 
     label.reverse
   end
