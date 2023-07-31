@@ -8,6 +8,16 @@ The goal of this component is to collect and list all the deprecation of the pro
 
 Add `gem 'deprecations_detector'` to your application's Gemfile and execute `bundle`.
 
+Specify DeprecationDetector::Collect class as deprecation class with:
+
+```
+Rails.application.configure do
+  ...
+  config.active_support.deprecation = DeprecationsDetector::Collect
+  ...
+end
+```
+
 Put the following code under you specs configuration:
 
 ```ruby
