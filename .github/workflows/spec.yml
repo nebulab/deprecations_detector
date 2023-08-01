@@ -1,0 +1,19 @@
+name: "Rspec"
+on:
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.2
+          bundler-cache: true
+      - name: Run tests
+        run: bundle exec rspec spec

@@ -4,7 +4,7 @@ module DeprecationsDetector
   class Main
     include Singleton
 
-    attr_reader :coverage_matrix, :deprecation_matrix, :suppress_deprecations
+    attr_reader :coverage_matrix, :deprecation_matrix
     attr_accessor :config, :output_path
 
     def initialize
@@ -51,9 +51,7 @@ module DeprecationsDetector
       @deprecation_matrix[file_path][result[2].to_i - 1] = message
     end
 
-    def start(suppress_deprecations: false)
-      @suppress_deprecations = suppress_deprecations
-
+    def start
       @coverage_matrix = {}
       @deprecation_matrix = {}
     end
