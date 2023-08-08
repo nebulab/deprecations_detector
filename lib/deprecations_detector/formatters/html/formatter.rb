@@ -96,7 +96,13 @@ module DeprecationsDetector
           grouped_files = []
 
           groups.each do |deprecation_message|
-            grouped[deprecation_message] = files.select { |source_file, lines| lines.detect { |line, examples| examples.detect { |example| example[:deprecation_message] == deprecation_message } } }
+            grouped[deprecation_message] = files.select do |source_file, lines|
+              lines.detect do |line, examples|
+                examples.detect do |example|
+                  example[:deprecation_message] == deprecation_message
+                end
+              end
+            end
             grouped_files += grouped[deprecation_message].keys
           end
           if !groups.empty? && !(other_files = files.reject { |source_file| grouped_files.include?(source_file) }).empty?
