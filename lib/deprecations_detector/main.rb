@@ -48,7 +48,7 @@ module DeprecationsDetector
       file_path = result[1] # "#{Dir.pwd}#{result[1]}"
 
       @deprecation_matrix[file_path] ||= {}
-      @deprecation_matrix[file_path][result[2].to_i - 1] = message
+      @deprecation_matrix[file_path][result[2].to_i - 1] = /(.*)\(called.*\)/m.match(message)[1]
     end
 
     def start
