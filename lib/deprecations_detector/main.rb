@@ -52,8 +52,8 @@ module DeprecationsDetector
     end
 
     def start
-      @coverage_matrix = {}
-      @deprecation_matrix = {}
+      @coverage_matrix ||= {}
+      @deprecation_matrix ||= {}
     end
 
     def save_results(matrix = @coverage_matrix, file_name: ENV['MATRIX_FILENAME'] || 'deprecations_detector.yml')
