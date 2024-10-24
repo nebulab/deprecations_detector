@@ -9,6 +9,10 @@ class SomeClass
   end
 
   def reverse
+    deprecated_reverse
+  end
+
+  def deprecated_reverse
     deprecator = ActiveSupport::Deprecation.new
     deprecator.behavior = DeprecationsDetector::Collect
     deprecator.warn('My Deprecation')
